@@ -46,6 +46,7 @@ def get_coin_data_csv(coin_code: str, coin_name: str) -> None:
         log.info(f"Fetching data for {coin_name}")
 
         scraper = CmcScraper(coin_code=coin_code, coin_name=coin_name)
+
         scraper.export("csv", name=f"./coin_datasets/{coin_code}_all_time")
 
         with open(FETCH_RECORD_FILE, "w", encoding="utf-8") as f:
@@ -67,4 +68,4 @@ if __name__ == "__main__":
     get_coin_data_csv("eth", "ethereum")
     get_coin_data_csv("aave", "aave")
     get_coin_data_csv("doge", "dogecoin")
-    # get_coin_data_csv("xrp", "ripple")
+    get_coin_data_csv("xrp", "xrp")
