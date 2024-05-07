@@ -38,6 +38,15 @@ def can_fetch_data(coin_name: str) -> tuple[bool, dict]:
     return can_fetch, fetch_record
 
 
+def get_coin_data_df(coin_code: str, coin_name: str) -> DataFrame:
+
+    scraper = CmcScraper(coin_code=coin_code, coin_name=coin_name)
+
+    df = scraper.get_dataframe()
+
+    return df
+
+
 def get_coin_data_csv(coin_code: str, coin_name: str) -> None:
 
     can_fetch, fetch_record = can_fetch_data(coin_name)
@@ -52,15 +61,6 @@ def get_coin_data_csv(coin_code: str, coin_name: str) -> None:
         with open(FETCH_RECORD_FILE, "w", encoding="utf-8") as f:
             fetch_record[coin_name] = time.ctime(time.time())
             json.dump(fetch_record, f)
-
-
-def get_coin_data_df(coin_code: str, coin_name: str) -> DataFrame:
-
-    scraper = CmcScraper(coin_code=coin_code, coin_name=coin_name)
-
-    df = scraper.get_dataframe()
-
-    return df
 
 
 if __name__ == "__main__":
